@@ -15,9 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Fitness Tracker App',
+      title: 'FTA',
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.deepPurple,
             centerTitle: true,
             title: Text('Tracker Home')),
         body: Center(child: Text('Firebase Initialized!')),
