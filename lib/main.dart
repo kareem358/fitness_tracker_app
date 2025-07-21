@@ -26,7 +26,23 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.deepPurple,
             centerTitle: true,
             title: Text('Tracker Home')),
-        body: Center(child: Text('Firebase Initialized!')),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () async {
+              await analytics.logEvent(
+                name: 'custom_button_click',
+                parameters: {
+                  'screen': 'home',
+                  'purpose': 'learning_analytics',
+                },
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Custom event logged!')),
+              );
+            },
+            child: Text('Log Custom Event'),
+          ),
+        ),
       ),
     );
   }
