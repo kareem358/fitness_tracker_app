@@ -34,6 +34,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final doc = await _firestore.collection('users').doc(uid).get();
     final data = doc.data();
     if (data != null) {
+      if (!mounted) return;
+      setState(() {
+        name = data['name'] ?? '';
+        age = (data['age'] as num?)?.toInt() ?? 0;
+        gender = data['gender'] ?? '';
+        height = (data['height'] as num?)?.toDouble() ?? 0.0;
+        weight = (data['weight'] as num?)?.toDouble() ?? 0.0;
+        loading = false;
+      });
+    }
+  }
+
+  /*void loadData() async {
+    final doc = await _firestore.collection('users').doc(uid).get();
+    final data = doc.data();
+    if (data != null) {
       setState(() {
         name = data['name'];
         age = data['age'];
@@ -43,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         loading = false;
       });
     }
-  }
+  }*/
 
   void saveProfile() async {
     if (_formKey.currentState!.validate()) {
