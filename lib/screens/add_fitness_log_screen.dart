@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddFitnessLogScreen extends StatefulWidget {
   const AddFitnessLogScreen({Key? key}) : super(key: key);
@@ -14,6 +15,9 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
   final TextEditingController _workoutController = TextEditingController();
   final TextEditingController _durationController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final String _uid = FirebaseAuth.instance.currentUser!.uid;
+
 
   DateTime _selectedDate = DateTime.now();
   bool _isSaving = false;
@@ -53,7 +57,11 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
     setState(() => _isSaving = true);
 
     try {
-      await FirebaseFirestore.instance.collection('fitness_logs').add({
+      await _firestore
+          .collection('users')
+          .doc(_uid)
+          .collection('fitness_logs')
+          .add({
         'workout': _workoutController.text.trim(),
         'duration': int.parse(_durationController.text.trim()),
         'notes': _notesController.text.trim(),
@@ -62,19 +70,20 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Log added successfully!')),
+        const SnackBar(content: Text('✅ Log added successfully!')),
       );
 
-      Navigator.pop(context);
+      Navigator.pop(context, true); // returns `true` to HomeScreen
     } catch (e) {
       print("Error adding log: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Something went wrong')),
+        const SnackBar(content: Text('❌ Something went wrong')),
       );
     }
 
     setState(() => _isSaving = false);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
