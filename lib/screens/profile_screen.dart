@@ -79,7 +79,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: const Text('Edit Profile', style: TextStyle(color: Colors.white,
+        fontSize: 24)),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
