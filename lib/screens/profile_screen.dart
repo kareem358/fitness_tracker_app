@@ -122,6 +122,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
+                value: gender, // assuming _gender == 'male', 'female', etc.
+                items: ['Male', 'Female', 'Other'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value.toLowerCase(), // store in lowercase
+                    child: Text(value), // show nicely capitalized
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    gender = value!;
+                  });
+                },
+                decoration: InputDecoration(labelText: 'Gender'),
+              ),
+
+              /*DropdownButtonFormField<String>(
                 value: gender.isNotEmpty ? gender : null,
                 decoration: const InputDecoration(labelText: 'Gender'),
                 items: ['Male', 'Female', 'Other']
@@ -129,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     .toList(),
                 validator: (val) => val == null || val.isEmpty ? 'Required' : null,
                 onChanged: (val) => gender = val!,
-              ),
+              ),*/
               const SizedBox(height: 12),
               TextFormField(
                 initialValue: height > 0 ? height.toString() : '',
