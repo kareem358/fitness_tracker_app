@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid != null) {
       final user = await UserService().getUserById(uid);
+      if (!mounted) return;
       setState(() {
         _user = user;
       });
