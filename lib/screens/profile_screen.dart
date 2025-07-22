@@ -93,7 +93,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile', style: TextStyle(color: Colors.white)),
+        title: const Text('Edit Profile', style: TextStyle(color: Colors.white,
+        fontSize: 22,  fontWeight: FontWeight.bold)),
         backgroundColor: Colors.deepPurple,
         centerTitle: true,
       ),
@@ -172,8 +173,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               saving
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton.icon(
-                icon: const Icon(Icons.save),
-                label: const Text('Save'),
+                icon: const Icon(Icons.save, color: Colors.white,),
+                label: const Text('Save', style: TextStyle(fontSize: 18,
+                    fontWeight: FontWeight.bold, color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
                   padding: const EdgeInsets.symmetric(vertical: 16),
