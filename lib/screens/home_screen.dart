@@ -1,4 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../services/auth_service.dart';
+import '../services/user_service.dart';
+import '../models/user_model.dart';
+import 'login_screen.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final AuthService auth = AuthService();
+  AppUser? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUser();
+  }
+
+  void _loadUser() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      final user = await UserService().getUserById(uid);
+      setState(() {
+        _user = user;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Welcome',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(
+            color: Colors.white,
+            icon: const Icon(Icons.logout),
+            onPressed: () async {
+              await auth.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const LoginScreen()),
+              );
+            },
+          )
+        ],
+      ),
+      body: _user == null
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("👤 Name: ${_user!.name}", style: const TextStyle(fontSize: 18)),
+            Text("📧 Email: ${_user!.email}", style: const TextStyle(fontSize: 18)),
+            Text("🎂 Age: ${_user!.age}", style: const TextStyle(fontSize: 18)),
+            Text("🚻 Gender: ${_user!.gender}", style: const TextStyle(fontSize: 18)),
+            Text("📏 Height: ${_user!.height} cm", style: const TextStyle(fontSize: 18)),
+            Text("⚖️ Weight: ${_user!.weight} kg", style: const TextStyle(fontSize: 18)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*
+
+
+import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'login_screen.dart';
 
@@ -41,3 +126,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+*/
