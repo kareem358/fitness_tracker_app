@@ -91,7 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   backgroundColor: Colors.deepPurple,
                   minimumSize: const Size.fromHeight(50),
                 ),
-                child: Text(_isLogin ? 'Login' : 'Sign Up'),
+                child: Text(_isLogin ? 'Login' : 'Sign Up', style: const TextStyle(fontSize: 18,
+                    color: Colors.white)),
               ),
               TextButton(
                 onPressed: () {
