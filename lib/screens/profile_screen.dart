@@ -14,7 +14,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Form fields
   String name = '';
   int age = 0;
   String gender = '';
@@ -31,29 +30,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void loadData() async {
-    final doc = await _firestore.collection('users').doc(uid).get();
-    final data = doc.data();
-    if (data != null) {
-      if (!mounted) return;
-      setState(() {
-        name = data['name'] ?? '';
-        age = (data['age'] as num?)?.toInt() ?? 0;
-        gender = data['gender'] ?? '';
-        height = (data['height'] as num?)?.toDouble() ?? 0.0;
-        weight = (data['weight'] as num?)?.toDouble() ?? 0.0;
-        loading = false;
-      });
+    try {
+      final doc = await _firestore.collection('users').doc(uid).get();
+      final data = doc.data();
+      if (data != null && mounted) {
+        setState(() {
+          name = data['name'] ?? '';
+          age = (data['age'] is int) ? data['age'] : int.tryParse(data['age'].toString()) ?? 0;
+          gender = data['gender'] ?? '';
+          height = (data['height'] as num?)?.toDouble() ?? 0.0;
+          weight = (data['weight'] as num?)?.toDouble() ?? 0.0;
+          loading = false;
+        });
+      }
+    } catch (e) {
+      debugPrint('Error loading profile: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('❌ Failed to load profile')),
+        );
+      }
     }
   }
 
-
-
   void saveProfile() async {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
+    if (!_formKey.currentState!.validate()) return;
+    _formKey.currentState!.save();
 
-      setState(() => saving = true);
+    setState(() => saving = true);
 
+    try {
       await _firestore.collection('users').doc(uid).update({
         'name': name,
         'age': age,
@@ -62,13 +68,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
         'weight': weight,
       });
 
-      setState(() => saving = false);
-
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('✅ Profile updated')),
       );
 
-      Navigator.pop(context, true); // Return true to refresh HomeScreen
+      Navigator.pop(context, true); // Refresh home if needed
+    } catch (e) {
+      debugPrint('Error saving profile: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('❌ Failed to save profile')),
+      );
+    } finally {
+      if (mounted) setState(() => saving = false);
     }
   }
 
@@ -82,10 +93,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile', style: TextStyle(color: Colors.white,
-        fontSize: 24)),
-        centerTitle: true,
+        title: const Text('Edit Profile', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.deepPurple,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -96,44 +106,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
               TextFormField(
                 initialValue: name,
                 decoration: const InputDecoration(labelText: 'Name'),
-                validator: (val) => val == null || val.isEmpty ? 'Required' : null,
-                onSaved: (val) => name = val ?? '',
+                validator: (val) => val == null || val.trim().isEmpty ? 'Required' : null,
+                onSaved: (val) => name = val!.trim(),
               ),
+              const SizedBox(height: 12),
               TextFormField(
-                initialValue: age.toString(),
+                initialValue: age > 0 ? age.toString() : '',
                 decoration: const InputDecoration(labelText: 'Age'),
                 keyboardType: TextInputType.number,
-                validator: (val) =>
-                (val == null || int.tryParse(val) == null || int.parse(val) <= 0)
-                    ? 'Enter valid age'
-                    : null,
-                onSaved: (val) => age = int.tryParse(val ?? '') ?? 0,
+                validator: (val) {
+                  final parsed = int.tryParse(val ?? '');
+                  return (parsed == null || parsed <= 0) ? 'Enter valid age' : null;
+                },
+                onSaved: (val) => age = int.parse(val!),
               ),
-              TextFormField(
-                initialValue: gender,
+              const SizedBox(height: 12),
+              DropdownButtonFormField<String>(
+                value: gender.isNotEmpty ? gender : null,
                 decoration: const InputDecoration(labelText: 'Gender'),
+                items: ['Male', 'Female', 'Other']
+                    .map((g) => DropdownMenuItem(value: g, child: Text(g)))
+                    .toList(),
                 validator: (val) => val == null || val.isEmpty ? 'Required' : null,
-                onSaved: (val) => gender = val ?? '',
+                onChanged: (val) => gender = val!,
               ),
+              const SizedBox(height: 12),
               TextFormField(
-                initialValue: height.toString(),
+                initialValue: height > 0 ? height.toString() : '',
                 decoration: const InputDecoration(labelText: 'Height (cm)'),
                 keyboardType: TextInputType.number,
-                validator: (val) =>
-                (val == null || double.tryParse(val) == null || double.parse(val) <= 0)
-                    ? 'Enter valid height'
-                    : null,
-                onSaved: (val) => height = double.tryParse(val ?? '') ?? 0,
+                validator: (val) {
+                  final parsed = double.tryParse(val ?? '');
+                  return (parsed == null || parsed <= 0) ? 'Enter valid height' : null;
+                },
+                onSaved: (val) => height = double.parse(val!),
               ),
+              const SizedBox(height: 12),
               TextFormField(
-                initialValue: weight.toString(),
+                initialValue: weight > 0 ? weight.toString() : '',
                 decoration: const InputDecoration(labelText: 'Weight (kg)'),
                 keyboardType: TextInputType.number,
-                validator: (val) =>
-                (val == null || double.tryParse(val) == null || double.parse(val) <= 0)
-                    ? 'Enter valid weight'
-                    : null,
-                onSaved: (val) => weight = double.tryParse(val ?? '') ?? 0,
+                validator: (val) {
+                  final parsed = double.tryParse(val ?? '');
+                  return (parsed == null || parsed <= 0) ? 'Enter valid weight' : null;
+                },
+                onSaved: (val) => weight = double.parse(val!),
               ),
               const SizedBox(height: 24),
               saving
@@ -155,125 +172,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-
-
-
-/*
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final uid = FirebaseAuth.instance.currentUser!.uid;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  // Form fields
-  String name = '';
-  int age = 0;
-  String gender = '';
-  double height = 0;
-  double weight = 0;
-
-  bool loading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    loadData();
-  }
-
-  void loadData() async {
-    final doc = await _firestore.collection('users').doc(uid).get();
-    final data = doc.data();
-    if (data != null) {
-      setState(() {
-        name = data['name'];
-        age = data['age'];
-        gender = data['gender'];
-        height = (data['height'] as num).toDouble();
-        weight = (data['weight'] as num).toDouble();
-        loading = false;
-      });
-    }
-  }
-
-  void saveProfile() async {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-
-      await _firestore.collection('users').doc(uid).update({
-        'name': name,
-        'age': age,
-        'gender': gender,
-        'height': height,
-        'weight': weight,
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Profile updated')),
-      );
-    }
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (loading) return const Center(child: CircularProgressIndicator());
-
-    return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profile')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              TextFormField(
-                initialValue: name,
-                decoration: const InputDecoration(labelText: 'Name'),
-                onSaved: (val) => name = val ?? '',
-              ),
-              TextFormField(
-                initialValue: age.toString(),
-                decoration: const InputDecoration(labelText: 'Age'),
-                keyboardType: TextInputType.number,
-                onSaved: (val) => age = int.tryParse(val ?? '') ?? 0,
-              ),
-              TextFormField(
-                initialValue: gender,
-                decoration: const InputDecoration(labelText: 'Gender'),
-                onSaved: (val) => gender = val ?? '',
-              ),
-              TextFormField(
-                initialValue: height.toString(),
-                decoration: const InputDecoration(labelText: 'Height (cm)'),
-                keyboardType: TextInputType.number,
-                onSaved: (val) => height = double.tryParse(val ?? '') ?? 0,
-              ),
-              TextFormField(
-                initialValue: weight.toString(),
-                decoration: const InputDecoration(labelText: 'Weight (kg)'),
-                keyboardType: TextInputType.number,
-                onSaved: (val) => weight = double.tryParse(val ?? '') ?? 0,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: saveProfile,
-                child: const Text('Save'),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-*/
