@@ -46,20 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  /*void loadData() async {
-    final doc = await _firestore.collection('users').doc(uid).get();
-    final data = doc.data();
-    if (data != null) {
-      setState(() {
-        name = data['name'];
-        age = data['age'];
-        gender = data['gender'];
-        height = (data['height'] as num).toDouble();
-        weight = (data['weight'] as num).toDouble();
-        loading = false;
-      });
-    }
-  }*/
+
 
   void saveProfile() async {
     if (_formKey.currentState!.validate()) {
