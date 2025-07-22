@@ -4,6 +4,8 @@ import '../services/auth_service.dart';
 import '../services/user_service.dart';
 import '../models/user_model.dart';
 import 'login_screen.dart';
+import 'profile_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -73,6 +75,22 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("🚻 Gender: ${_user!.gender}", style: const TextStyle(fontSize: 18)),
             Text("📏 Height: ${_user!.height} cm", style: const TextStyle(fontSize: 18)),
             Text("⚖️ Weight: ${_user!.weight} kg", style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () async {
+                // Navigate to ProfileScreen and wait for result
+                final updated = await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                );
+
+                // If user updated profile, reload user data
+                if (updated == true) {
+                  _loadUser(); // refresh home screen
+                }
+              },
+              child: const Text('✏️ Edit Profile'),
+            ),
           ],
         ),
       ),
