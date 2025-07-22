@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../services/auth_service.dart';
 import '../services/user_service.dart';
 import '../models/user_model.dart';
+import 'add_fitness_log_screen.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
 
@@ -96,6 +97,24 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
 
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          // Open AddFitnessLogScreen
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const AddFitnessLogScreen()),
+          );
+
+          // If log added successfully, you can refresh or do something here
+          if (result == true) {
+            // For now, just print or refresh user data if needed
+            print('New fitness log added');
+          }
+        },
+        backgroundColor: Colors.deepPurple,
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
+
     );
   }
 }
