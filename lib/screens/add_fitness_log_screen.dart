@@ -107,8 +107,22 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
                 controller: _durationController,
                 decoration: const InputDecoration(labelText: 'Duration (minutes)'),
                 keyboardType: TextInputType.number,
-                validator: (value) =>
-                value!.isEmpty ? 'Enter duration' : null,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Enter duration';
+                  }
+
+                  final number = int.tryParse(value.trim());
+                  if (number == null) {
+                    return 'Enter a valid number';
+                  }
+
+                  if (number <= 0) {
+                    return 'Duration must be positive';
+                  }
+
+                  return null; // ✅ All good
+                },
               ),
               const SizedBox(height: 12),
               TextFormField(
