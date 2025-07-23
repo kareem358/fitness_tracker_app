@@ -33,16 +33,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       final doc = await _firestore.collection('users').doc(uid).get();
       final data = doc.data();
-      if (data != null && mounted) {
+      if (mounted) {
         setState(() {
-          name = data['name'] ?? '';
-          age = (data['age'] is int) ? data['age'] : int.tryParse(data['age'].toString()) ?? 0;
-          gender = data['gender'] ?? '';
-          height = (data['height'] as num?)?.toDouble() ?? 0.0;
-          weight = (data['weight'] as num?)?.toDouble() ?? 0.0;
+          if (data != null) {
+            name = data['name'] ?? '';
+            age = (data['age'] is int) ? data['age'] : int.tryParse(data['age'].toString()) ?? 0;
+            gender = data['gender'] ?? '';
+            height = (data['height'] as num?)?.toDouble() ?? 0.0;
+            weight = (data['weight'] as num?)?.toDouble() ?? 0.0;
+          }
           loading = false;
         });
       }
+
     } catch (e) {
       debugPrint('Error loading profile: $e');
       if (mounted) {
@@ -60,13 +63,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() => saving = true);
 
     try {
-      await _firestore.collection('users').doc(uid).update({
+      await _firestore.collection('users').doc(uid).set({
+    //  await _firestore.collection('users').doc(uid).update({
         'name': name,
         'age': age,
         'gender': gender,
         'height': height,
         'weight': weight,
-      });
+      },SetOptions(merge: true));
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('✅ Profile updated')),
