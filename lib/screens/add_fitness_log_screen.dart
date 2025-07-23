@@ -82,7 +82,8 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEditing ? 'Edit Fitness Log' : 'Add Fitness Log'),
+        centerTitle: true,
+        title: Text(isEditing ? 'Edit Fitness Log' : 'Add Fitness Log',style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
@@ -113,7 +114,7 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
               ElevatedButton(
                 onPressed: _saveLog,
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
-                child: Text(isEditing ? 'Update Log' : 'Save Log'),
+                child: Text(isEditing ? 'Update Log' : 'Save Log', style: TextStyle(color: Colors.white),),
               ),
             ],
           ),
