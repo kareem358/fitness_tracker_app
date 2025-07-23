@@ -138,15 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 decoration: InputDecoration(labelText: 'Gender'),
               ),
 
-              /*DropdownButtonFormField<String>(
-                value: gender.isNotEmpty ? gender : null,
-                decoration: const InputDecoration(labelText: 'Gender'),
-                items: ['Male', 'Female', 'Other']
-                    .map((g) => DropdownMenuItem(value: g, child: Text(g)))
-                    .toList(),
-                validator: (val) => val == null || val.isEmpty ? 'Required' : null,
-                onChanged: (val) => gender = val!,
-              ),*/
+
               const SizedBox(height: 12),
               TextFormField(
                 initialValue: height > 0 ? height.toString() : '',
