@@ -1,3 +1,7 @@
+
+
+
+/*
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -142,8 +146,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Card(
                         margin: const EdgeInsets.symmetric(vertical: 6),
                         child: ListTile(
+                          onTap: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => AddFitnessLogScreen(
+                                  existingLog: log,
+                                  logId: log.id,
+                                ),
+                              ),
+                            );
+
+                            if (result == true) {
+                              setState(() {}); // Refresh the list after edit
+                            }
+                          },
                           title: Text(workout, style: const TextStyle(fontWeight: FontWeight.bold)),
-                          subtitle: Text('Duration: $duration mins\nNotes: $notes\nDate: ${DateFormat.yMd().add_jm().format(date)}'),
+                          subtitle: Text(
+                            'Duration: $duration mins\nNotes: $notes\nDate: ${DateFormat.yMd().add_jm().format(date)}',
+                          ),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: () async {
@@ -169,9 +190,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               }
                             },
                           ),
-
-                         
                         ),
+
                       );
                     },
                   ),
@@ -201,3 +221,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+*/
