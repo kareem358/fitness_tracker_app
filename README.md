@@ -29,6 +29,7 @@ https://github.com/kareem358/tracker_pulse_app
 Project Structure 
 
 <img width="768" height="652" alt="image" src="https://github.com/user-attachments/assets/7fbb6fb7-b6e9-4446-84ab-89d946080446" />
+
 lib/
 ├── main.dart
 ├── auth/
