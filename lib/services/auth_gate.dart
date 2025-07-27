@@ -6,9 +6,7 @@ import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/profile_screen.dart';
 
-/*import 'home_screen.dart';
-import 'profile_screen.dart';
-import 'login_screen.dart';*/
+
 
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
