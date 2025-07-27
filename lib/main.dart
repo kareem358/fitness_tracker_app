@@ -72,7 +72,7 @@ class AuthGate extends StatelessWidget {
             if (userSnapshot.hasData) {
               return const HomeScreen();
             } else {
-              // Profile missing → redirect to profile setup
+
               return const ProfileScreen();
             }
           },
