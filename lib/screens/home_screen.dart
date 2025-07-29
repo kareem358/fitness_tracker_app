@@ -51,9 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("👤 ${_user!.name}", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Text("📧 ${_user!.email}"),
+            const SizedBox(height: 2),
             Text("🎂 Age: ${_user!.age}"),
+            const SizedBox(height: 2),
             Text("🚻 Gender: ${_user!.gender}"),
+            const SizedBox(height: 2),
             Text("📏 Height: ${_user!.height} cm"),
+            const SizedBox(height: 2),
             Text("⚖️ Weight: ${_user!.weight} kg"),
             const SizedBox(height: 10),
             Align(
