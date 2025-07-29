@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          '🏃 Tracker Pulse',
+          '🏃  Pulse Tracker',
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
