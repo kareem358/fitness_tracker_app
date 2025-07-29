@@ -1,4 +1,4 @@
-// 📌 STEP 1: Update main.dart to handle new users who need to set up profile
+
 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
