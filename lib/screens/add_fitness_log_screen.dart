@@ -94,7 +94,7 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
 
       Navigator.pop(context, true);
     } catch (e) {
-      _showSnackbar('❌ Failed to save log. Try again.');
+      _showSnackbar('❌ Saving log Failed . Try again.');
     } finally {
       setState(() => _isSaving = false);
     }
