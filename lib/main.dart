@@ -31,10 +31,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fitness Tracker',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+     /* theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
-      ),
+      ),*/
       home: const AuthGate(),
     );
   }
