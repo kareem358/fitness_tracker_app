@@ -7,7 +7,7 @@ import '../screens/login_screen.dart';
 import '../screens/profile_screen.dart';
 
 
-
+// auth gate handles firebase auth + firestore user profile check
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
 
