@@ -31,6 +31,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fitness Tracker',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        primarySwatch: Colors.deepPurple,
+
+        scaffoldBackgroundColor: Colors.grey[100],
+      ),
      /* theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
