@@ -56,7 +56,7 @@ class AuthGate extends StatelessWidget {
           return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
 
-      
+
         if (!authSnapshot.hasData) {
           return const LoginScreen();
         }
