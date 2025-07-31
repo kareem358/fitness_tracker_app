@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
 
         scaffoldBackgroundColor: Colors.grey[100],
       ),
-   
+
       home: const AuthGate(),
     );
   }
@@ -56,7 +56,7 @@ class AuthGate extends StatelessWidget {
           return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
 
-        // Not logged in → show login screen
+      
         if (!authSnapshot.hasData) {
           return const LoginScreen();
         }
