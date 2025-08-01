@@ -1,4 +1,4 @@
-// this  is the intial code for this screeen nbow making the ui more polish 
+// this  is the initial code for this screen nbow making the ui more polish
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
