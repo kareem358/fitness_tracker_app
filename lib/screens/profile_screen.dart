@@ -158,6 +158,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onChanged: (value) => setState(() => gender = value ?? ''),
                   validator: (val) => (val == null || val.isEmpty) ? 'Please select gender' : null,
                 ),
+                SizedBox(height: 10,),
                 _buildTextField(
                   label: 'Height (cm)',
                   initialValue: height > 0 ? height.toString() : '',
