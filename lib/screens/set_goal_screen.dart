@@ -102,8 +102,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
       await GoalService().setWeeklyGoal(minutes);
       setState(() {
         _loading = false;
-        _message = 'Goal saved successfully!';
-      });
+        _message = 'Goal saved successfully!';      });
     }
   }
 
