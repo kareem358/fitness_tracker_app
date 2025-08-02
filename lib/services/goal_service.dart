@@ -15,7 +15,8 @@ class GoalService {
   }
 
   // Get the user's weekly goal
-  Future<Goal?> getWeeklyGoal(String uid) async {
+
+  /*Future<Goal?> getWeeklyGoal(String uid) async {
     final doc = await _firestore
         .collection('users')
         .doc(uid)
@@ -27,7 +28,7 @@ class GoalService {
       return Goal.fromMap(doc.data()!);
     }
     return null;
-  }
+  }*/
 }
 
 
