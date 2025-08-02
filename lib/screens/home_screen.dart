@@ -10,6 +10,9 @@ import '../models/user_model.dart';
 import 'add_fitness_log_screen.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
+import '../services/goal_service.dart';
+import '../models/goal_model.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -39,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget _buildUserInfoCard() {
+/*  Widget _buildUserInfoCard() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 4,
@@ -82,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +102,41 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.deepPurple,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.flag, color: Colors.white),
+            tooltip: 'Weekly Goal',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SetGoalScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.person, color: Colors.white),
+            tooltip: 'Profile',
+            onPressed: () async {
+              final updated = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProfileScreen()),
+              );
+              if (updated == true) _loadUser(); // optional: refresh data on return
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.white),
+            tooltip: 'Logout',
+            onPressed: () async {
+              await auth.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const LoginScreen()),
+              );
+            },
+          ),
+        ],
+
+        /*  actions: [
           ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -120,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           )
-        ],
+        ],*/
       ),
       body: _user == null
           ? const Center(child: CircularProgressIndicator())
@@ -141,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                _buildUserInfoCard(),
+                /*_buildUserInfoCard(),*/
                 const SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
