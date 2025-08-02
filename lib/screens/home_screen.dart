@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:tracker_pulse_app/screens/set_goal_screen.dart';
 import '../services/auth_service.dart';
 import '../services/user_service.dart';
 import '../models/user_model.dart';
@@ -98,6 +99,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.deepPurple,
         actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SetGoalScreen()),
+              );
+            },
+            child: const Text("Weekly Goal"),
+          ),
+
           IconButton(
             color: Colors.white,
             icon: const Icon(Icons.logout),
