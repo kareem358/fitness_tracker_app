@@ -35,7 +35,12 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Set Weekly Goal")),
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+          centerTitle: true,
+          title: const Text("Set Weekly Goal",
+            style: TextStyle(fontSize: 22,
+                fontWeight: FontWeight.bold,color: Colors.white), )),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
