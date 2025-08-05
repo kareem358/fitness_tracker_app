@@ -130,17 +130,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                   if (value == null || value.isEmpty) return 'Required';
                   if (int.tryParse(value) == null) return 'Enter valid number';
                   return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _loading ? null : _submitGoal,
-                child: _loading
-                    ? const CircularProgressIndicator()
-                    : const Text("Save Goal"),
-              ),
-              const SizedBox(height: 10),
-              Text(_message, style: const TextStyle(color: Colors.green)),
+
             ],
           ),
         ),
