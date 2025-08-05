@@ -83,6 +83,20 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
 import 'package:flutter/material.dart';
 import '../services/goal_service.dart';
 
+class SetGoalScreen extends StatefulWidget {
+  const SetGoalScreen({super.key});
+
+  @override
+  State<SetGoalScreen> createState() => _SetGoalScreenState();
+}
+
+class _SetGoalScreenState extends State<SetGoalScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _minutesController = TextEditingController();
+
+  bool _loading = false;
+  String _message = '';
+
   void _submitGoal() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
