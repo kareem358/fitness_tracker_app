@@ -1,4 +1,4 @@
-// user_model.dart
+
 
 class AppUser {
   final String uid;
