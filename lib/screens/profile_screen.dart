@@ -204,10 +204,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-/*is the widget we which will show the detail of the user profile in a
-separate contianer but no it has almost no need as the profile icon shows
-this screen having all the details and optional for the editing as well these
-information*/
+
 // widget is
 /*  Widget _buildUserInfoCard() {
     return Card(
