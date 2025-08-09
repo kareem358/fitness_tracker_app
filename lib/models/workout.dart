@@ -2,8 +2,8 @@
 
 class Workout {
   final String id;
-  final String type; // e.g., Running, Push-ups
-  final int duration; // in minutes
+  final String type; // e.g., Running
+  final int duration; // only now in minutes
   final DateTime date;
 
   Workout({
