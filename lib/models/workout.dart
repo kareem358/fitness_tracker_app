@@ -22,7 +22,7 @@ class Workout {
     };
   }
 
-/*  factory Workout.fromMap(Map<String, dynamic> map) {
+  factory Workout.fromMap(Map<String, dynamic> map) {
     return Workout(
       id: map['id'] ?? '',
       type: map['type'] ?? '',
@@ -30,4 +30,4 @@ class Workout {
       date: DateTime.parse(map['date']),
     );
   }
-}*/
+}
