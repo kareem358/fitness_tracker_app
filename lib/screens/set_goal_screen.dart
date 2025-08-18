@@ -41,7 +41,39 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
           title: const Text("Set Weekly Goal",
             style: TextStyle(fontSize: 22,
                 fontWeight: FontWeight.bold,color: Colors.white), )),
-
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const Text("Enter your weekly fitness goal in minutes:"),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _minutesController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: "Target Minutes",
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) return "Required";
+                  final minutes = int.tryParse(value.trim());
+                  if (minutes == null || minutes <= 0) return "Enter a valid number";
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _isSaving ? null : _saveGoal,
+                child: _isSaving
+                    ? const CircularProgressIndicator()
+                    : const Text("Save Goal"),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
