@@ -206,3 +206,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 
+/*  Widget _buildUserInfoCard() {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("👤 ${_user!.name}", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 6),
+            Text("📧 ${_user!.email}"),
+            const SizedBox(height: 2),
+            Text("🎂 Age: ${_user!.age}"),
+            const SizedBox(height: 2),
+            Text("🚻 Gender: ${_user!.gender}"),
+            const SizedBox(height: 2),
+            Text("📏 Height: ${_user!.height} cm"),
+            const SizedBox(height: 2),
+            Text("⚖️ Weight: ${_user!.weight} kg"),
+            const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton.icon(
+                onPressed: () async {
+                  final updated = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                  );
+                  if (updated == true) _loadUser();
+                },
+                icon: const Icon(Icons.edit, color: Colors.white),
+                label: const Text('Edit Profile', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }*/
