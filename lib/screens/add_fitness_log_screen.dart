@@ -14,6 +14,26 @@ class AddFitnessLogScreen extends StatefulWidget {
   State<AddFitnessLogScreen> createState() => _AddFitnessLogScreenState();
 }
 
+class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _workoutController = TextEditingController();
+  final _durationController = TextEditingController();
+  final _notesController = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
+  bool _isSaving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.existingLog != null) {
+      final log = widget.existingLog!;
+      _workoutController.text = log['workout'];
+      _durationController.text = log['duration'].toString();
+      _notesController.text = log['notes'];
+      _selectedDate = (log['date'] as Timestamp).toDate();
+    }
+  }
+
   Future<void> _selectDateTime() async {
     final date = await showDatePicker(
       context: context,
