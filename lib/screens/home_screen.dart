@@ -27,6 +27,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _loadUser();
+  }
+
+  void _loadUser() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) {
+      final user = await UserService().getUserById(uid);
+      if (!mounted) return;
+      setState(() {
+        _user = user;
+      });
+    }
+  }
+
+  Future<int?> _fetchWeeklyGoal() async {
+    if (_user == null) return null;
+    final goal = await GoalService().getWeeklyGoal(_user!.uid);
+    return goal?.targetMinutes; // ✅ Correct field from Goal model
+  }
 
 
 /*  Future<int?> _fetchWeeklyGoal() async {
