@@ -10,6 +10,15 @@ class AppUser {
   final double weight;
 
   AppUser({
+    required this.uid,
+    required this.name,
+    required this.email,
+    required this.age,
+    required this.gender,
+    required this.height,
+    required this.weight,
+  });
+
   factory AppUser.fromMap(String uid, Map<String, dynamic> data) {
     return AppUser(
       uid: uid,
