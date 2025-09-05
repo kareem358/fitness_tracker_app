@@ -44,18 +44,7 @@ class MyApp extends StatelessWidget {
 }
 
 /// AuthGate handles Firebase auth + Firestore user profile check
-class AuthGate extends StatelessWidget {
-  const AuthGate({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, authSnapshot) {
-        if (authSnapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
-        }
-
+class AuthGate extend
 
         if (!authSnapshot.hasData) {
           return const LoginScreen();
