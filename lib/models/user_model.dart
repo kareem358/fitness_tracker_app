@@ -2,7 +2,12 @@
 
 class AppUser {
   final String uid;
-  final S
+  final String name;
+  final String email;
+  final int age;
+  final String gender;
+  final double height;
+  final double weight;
 
   AppUser({
     required this.uid,
