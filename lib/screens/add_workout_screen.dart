@@ -6,6 +6,14 @@ class AddWorkoutScreen extends StatefulWidget {
   const AddWorkoutScreen({super.key});
 
   @override
+  State<AddWorkoutScreen> createState() => _AddWorkoutScreenState();
+}
+
+class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
+  final _formKey = GlobalKey<FormState>();
+  String workoutType = '';
+  int duration = 0;
+  DateTime date = DateTime.now();
 
   void _saveWorkout() {
     if (_formKey.currentState!.validate()) {
