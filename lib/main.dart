@@ -56,7 +56,14 @@ class AuthGate extends StatelessWidget {
           return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
 
-ser profile
+
+        if (!authSnapshot.hasData) {
+          return const LoginScreen();
+        }
+
+        final uid = authSnapshot.data!.uid;
+
+        // Logged in → check Firestore for user profile
         return FutureBuilder<AppUser?>(
           future: UserService().getUserById(uid),
           builder: (context, userSnapshot) {
