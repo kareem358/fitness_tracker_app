@@ -197,6 +197,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPressed: saveProfile,
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 
 /*  Widget _buildUserInfoCard() {
