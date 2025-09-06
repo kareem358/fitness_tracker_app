@@ -14,14 +14,7 @@ class GoalService {
         .set(goal.toMap());
   }
 
-  // Get the user's weekly goal
-  Future<Goal?> getWeeklyGoal(String uid) async {
-    final doc = await _firestore
-        .collection('users')
-        .doc(uid)
-        .collection('goals')
-        .doc('weekly_goal')
-        .get();
+  // Get the user's we
 
     if (doc.exists) {
       return Goal.fromMap(doc.data()!);
