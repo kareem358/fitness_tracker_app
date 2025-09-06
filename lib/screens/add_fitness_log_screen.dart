@@ -11,9 +11,6 @@ class AddFitnessLogScreen extends StatefulWidget {
   const AddFitnessLogScreen({super.key, this.existingLog, this.logId});
 
   @override
-  State<AddFitnessLogScreen> createState() => _AddFitnessLogScreenState();
-}
-
 class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
   final _formKey = GlobalKey<FormState>();
   final _workoutController = TextEditingController();
