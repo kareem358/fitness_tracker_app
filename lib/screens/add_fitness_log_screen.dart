@@ -26,7 +26,23 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
   void initState() {
     super.initState();
     if (widget.existingLog != null) {
-      final log = widget.existingLog!
+      final log = widget.existingLog!;
+      _workoutController.text = log['workout'];
+      _durationController.text = log['duration'].toString();
+      _notesController.text = log['notes'];
+      _selectedDate = (log['date'] as Timestamp).toDate();
+    }
+  }
+
+  Future<void> _selectDateTime() async {
+    final date = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2100),
+    );
+    if (date == null) return;
+
     final time = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.fromDateTime(_selectedDate),
