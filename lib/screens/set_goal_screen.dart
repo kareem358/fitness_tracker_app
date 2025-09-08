@@ -9,6 +9,19 @@ class SetGoalScreen extends StatefulWidget {
   @override
   State<SetGoalScreen> createState() => _SetGoalScreenState();
 }
+
+class _SetGoalScreenState extends State<SetGoalScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _minutesController = TextEditingController();
+  bool _isSaving = false;
+
+  Future<void> _saveGoal() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isSaving = true);
+
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final goal = Goal(
       targetMinutes: int.parse(_minutesController.text.trim()),
       createdAt: DateTime.now(),
     );
