@@ -183,14 +183,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 saving
                     ? const Center(child: CircularProgressIndicator())
                     : ElevatedButton.icon(
-                  icon: const Icon(Icons.save, color: Colors.white),
-                  label: const Text(
-                    'Save',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
                     minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
