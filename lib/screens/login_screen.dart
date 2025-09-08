@@ -59,6 +59,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 _isLogin ? 'Welcome Back' : 'Create Account',
                 style: const TextStyle(
                   fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepPurple,
+                ),
+              ),
+              const SizedBox(height: 32),
+              TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
                   labelText: 'Email',
