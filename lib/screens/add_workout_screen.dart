@@ -23,8 +23,6 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         type: workoutType,
         duration: duration,
         date: date,
-      );
-
       Navigator.pop(context, workout); // Return the workout to previous screen
     }
   }
