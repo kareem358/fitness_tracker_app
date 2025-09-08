@@ -39,6 +39,23 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
+
+  Future<int?> _fetchWeeklyGoal() async {
+    if (_user == null) return null;
+    final goal = await GoalService().getWeeklyGoal(_user!.uid);
+    return goal?.targetMinutes; // ✅ Correct field from Goal model
+  }
+
+
+/*  Future<int?> _fetchWeeklyGoal() async {
+    if (_user == null) return null;
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(_user!.uid)
+        .collection('goals')
+        .doc('weekly_goal')
+        .get();
+    if (snapshot.exists) {
       return snapshot.data()?['weekly_goal'] as int?;
     }
     return null;
