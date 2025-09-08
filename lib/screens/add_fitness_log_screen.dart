@@ -44,14 +44,6 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
     if (date == null) return;
 
     final time = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.fromDateTime(_selectedDate),
-    );
-    if (time == null) return;
-
-    setState(() {
-      _selectedDate = DateTime(
-        date.year,
         date.month,
         date.day,
         time.hour,
