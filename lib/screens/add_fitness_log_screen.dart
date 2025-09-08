@@ -32,6 +32,9 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
       _notesController.text = log['notes'];
       _selectedDate = (log['date'] as Timestamp).toDate();
     }
+  }
+
+  Future<void> _selectDateTime() async {
     final date = await showDatePicker(
       context: context,
       initialDate: _selectedDate,
