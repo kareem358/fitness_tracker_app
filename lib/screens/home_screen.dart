@@ -32,13 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _loadUser() async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid != null) {
-      final user = await UserService().getUserById(uid);
-      if (!mounted) return;
-      setState(() {
-        _user = user;
-      });
-    }
-  }
+      final user = await UserServ
 
   Future<int?> _fetchWeeklyGoal() async {
     if (_user == null) return null;
