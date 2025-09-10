@@ -194,7 +194,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  onPressed: s
+                  onPressed: saveProfile,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+/*  Widget _buildUserInfoCard() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 4,
