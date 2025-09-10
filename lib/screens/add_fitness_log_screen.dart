@@ -38,6 +38,15 @@ class _AddFitnessLogScreenState extends State<AddFitnessLogScreen> {
     final date = await showDatePicker(
       context: context,
       initialDate: _selectedDate,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2100),
+    );
+    if (date == null) return;
+
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(_selectedDate),
+    );
     if (time == null) return;
 
     setState(() {
