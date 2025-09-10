@@ -44,7 +44,10 @@ class MyApp extends StatelessWidget {
 }
 
 /// AuthGate handles Firebase auth + Firestore user profile check
-class AuthGate
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
