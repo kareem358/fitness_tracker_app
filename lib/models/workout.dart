@@ -14,6 +14,16 @@ class Workout {
   });
 
   Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'type': type,
+      'duration': duration,
+      'date': date.toIso8601String(),
+    };
+  }
+
+  factory Workout.fromMap(Map<String, dynamic> map) {
+    return Workout(
       id: map['id'] ?? '',
       type: map['type'] ?? '',
       duration: map['duration'] ?? 0,
