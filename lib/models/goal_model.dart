@@ -4,6 +4,11 @@ class Goal {
 
   Goal({required this.targetMinutes, required this.createdAt});
 
+  Map<String, dynamic> toMap() {
+    return {
+      'targetMinutes': targetMinutes,
+      'createdAt': createdAt.toIso8601String(),
+    };
   }
 
   factory Goal.fromMap(Map<String, dynamic> map) {
