@@ -22,7 +22,18 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
 
     final uid = FirebaseAuth.instance.currentUser!.uid;
     final goal = Goal(
-      targetMinutes: int.parse(_minutesCont
+      targetMinutes: int.parse(_minutesController.text.trim()),
+      createdAt: DateTime.now(),
+    );
+
+    await GoalService().setWeeklyGoal(uid, goal);
+
+    setState(() => _isSaving = false);
+    if (context.mounted) Navigator.pop(context); // Go back after saving
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
