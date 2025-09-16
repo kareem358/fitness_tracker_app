@@ -20,13 +20,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       _formKey.currentState!.save();
       final workout = Workout(
         id: const Uuid().v4(),
-        type: workoutType,
-        duration: duration,
-        date: date,
-      );
 
-      Navigator.pop(context, workout); // Return the workout to previous screen
-    }
   }
 
   @override
