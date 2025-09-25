@@ -147,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onSaved: (val) => age = int.parse(val!),
                 ),
                 DropdownButtonFormField<String>(
-                  value: gender.isNotEmpty ? gender : null,
+                  initialValue: gender.isNotEmpty ? gender : null,
                   decoration: const InputDecoration(labelText: 'Gender'),
                   items: ['Male', 'Female', 'Other'].map((value) {
                     return DropdownMenuItem<String>(
