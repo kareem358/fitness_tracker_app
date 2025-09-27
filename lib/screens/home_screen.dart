@@ -101,6 +101,15 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           IconButton(
+            icon: const Icon(Icons.history, color: Colors.white,),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HistoryScreen()),
+              );
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.person, color: Colors.white),
             tooltip: 'Profile',
             onPressed: () async {
