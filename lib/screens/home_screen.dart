@@ -12,6 +12,8 @@ import 'add_fitness_log_screen.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
 import '../services/goal_service.dart';
+import 'history_screen.dart';
+
 import '../models/goal_model.dart';
 
 class HomeScreen extends StatefulWidget {
