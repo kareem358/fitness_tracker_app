@@ -21,10 +21,12 @@ class HistoryScreen extends StatelessWidget {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
             .collection('fitness_logs')
-            .where('userId', isEqualTo: user.uid)
             .orderBy('date', descending: true)
             .snapshots(),
+
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -46,7 +48,7 @@ class HistoryScreen extends StatelessWidget {
 
               return ListTile(
                 leading: const Icon(Icons.fitness_center),
-                title: Text("$type - ${duration} min"),
+                title: Text("$type - $duration min"),
                 subtitle: Text("${date.toLocal()}"),
               );
             },
