@@ -43,12 +43,12 @@ class HistoryScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final log = logs[index].data() as Map<String, dynamic>;
               final date = (log['date'] as Timestamp).toDate();
-              final type = log['type'] ?? 'Unknown';
+              final workout = log['workout'] ?? 'Unknown Workout';
               final duration = log['duration'] ?? 0;
 
               return ListTile(
                 leading: const Icon(Icons.fitness_center),
-                title: Text("$type - $duration min"),
+                title: Text("$workout - $duration min"),
                 subtitle: Text("${date.toLocal()}"),
               );
             },
