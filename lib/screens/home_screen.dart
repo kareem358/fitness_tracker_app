@@ -1048,31 +1048,4 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
 
-        *//*
-
-*/
-/*  actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const SetGoalScreen()),
-              );
-            },
-            child: const Text("Weekly Goal"),
-          ),
-
-          IconButton(
-            color: Colors.white,
-            icon: const Icon(Icons.logout),
-            onPressed: () async {
-              await auth.signOut();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => const LoginScreen()),
-              );
-            },
-          )
-        ],*//*
-*/
-
+        */
