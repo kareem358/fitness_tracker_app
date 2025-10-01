@@ -950,53 +950,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 */
-/*
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
-import 'package:tracker_pulse_app/screens/set_goal_screen.dart';
-import '../services/auth_service.dart';
-import '../services/user_service.dart';
-import '../models/user_model.dart';
-import 'add_fitness_log_screen.dart';
-import 'login_screen.dart';
-import 'profile_screen.dart';
-import '../services/goal_service.dart';
-import '../models/goal_model.dart';
 
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final AuthService auth = AuthService();
-  AppUser? _user;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadUser();
-  }
-
-  void _loadUser() async {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid != null) {
-      final user = await UserService().getUserById(uid);
-      if (!mounted) return;
-      setState(() {
-        _user = user;
-      });
-    }
-  }
-
-*//*
-
-*/
 /*  Widget _buildUserInfoCard() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
