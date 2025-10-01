@@ -14,7 +14,6 @@ import 'profile_screen.dart';
 import '../services/goal_service.dart';
 import 'history_screen.dart';
 
-import '../models/goal_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -1122,30 +1121,4 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],*//*
 */
-/*
 
-      ),
-      body: _user == null
-          ? const Center(child: CircularProgressIndicator())
-          : StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .doc(_user!.uid)
-            .collection('fitness_logs')
-            .orderBy('date', descending: true)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          final logs = snapshot.data?.docs ?? [];
-
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                *//*
-
-*/
-/*_buildUserInfoCard(),*//*
-*/
